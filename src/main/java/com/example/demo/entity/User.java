@@ -25,6 +25,8 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = -4646071345801288788L;
 	
+	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name ="native", strategy="native")
@@ -54,6 +56,10 @@ public class User implements Serializable{
 			inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set<Role> roles;
 
+	public User() {
+		super();
+	}
+	
 	public User(Long id) {
 		super();
 		this.id = id;
@@ -83,12 +89,12 @@ public class User implements Serializable{
 		LastName = lastName;
 	}
 
-	public String getEnamil() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEnamil(String enamil) {
-		this.email = enamil;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUsername() {
