@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class User implements Serializable{
@@ -33,21 +36,28 @@ public class User implements Serializable{
 	private Long id;
 	
 	@Column
+	@NotBlank
+	@Size(min=5,max=12,message="No cumple el tamño requerido min 5 max 10")
 	private String firstName;
 	
 	@Column
+	@NotBlank(message = "cant be blank")
 	private String LastName;
 	
 	@Column
+	@NotBlank
 	private String email;
 	
 	@Column
+	@NotBlank
 	private String username;
 	
 	@Column
+	@NotBlank
 	private String password;
 	
 	@Transient
+	@NotBlank
 	private String confirmPassword;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
