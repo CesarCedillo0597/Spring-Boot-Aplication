@@ -38,7 +38,7 @@ public class UserControler {
 	}
 	
 	@GetMapping("/userForm")
-	public String userform(Model model) {
+	public String userForm(Model model) {
 		model.addAttribute("userForm",new User());
 		model.addAttribute("userList",userService.getAllUsers());
 		model.addAttribute("roles",roleRepository.findAll());
@@ -116,6 +116,16 @@ public class UserControler {
 	@GetMapping("/userForm/cancel")
 	public String cancelEditUser(ModelMap model) {
 		return "redirect:/userForm";
+	}
+	
+	@GetMapping("/deleteUser/{id}")
+	public String deleteUser(Model model, @PathVariable(name = "id")long id) {
+		try {
+			userService.deleteUser(id);
+		} catch (Exception e) {
+			model.addAttribute("listErrorMessage", e.getMessage());
+		}
+		return userForm(model);
 	}
 	
 }
